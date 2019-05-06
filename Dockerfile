@@ -15,7 +15,7 @@ LABEL "com.github.actions.description"="Optimize images (JPEGs) pushed to a bran
 LABEL "com.github.actions.icon"="code"
 LABEL "com.github.actions.color"="yellow"
 
-RUN apk --no-cache add jq bash
+RUN apk --no-cache add jq bash git
 
 COPY --from=builder guetzli_linux_x86-64 /usr/bin/guetzli
 
