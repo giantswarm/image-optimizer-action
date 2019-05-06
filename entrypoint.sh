@@ -36,12 +36,7 @@ done
 
 echo
 echo "git remote url:"
-git remote get-url --all origin
-
-echo
-echo "Configuring .git-credentials"
-git config --global credential.helper store
-echo https://${GITHUB_TOKEN}:x-oauth-basic@github.com > ${HOME}/.git-credentials
+git remote add origin https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
 
 _local_commit
 
