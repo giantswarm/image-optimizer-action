@@ -33,13 +33,13 @@ for f in $files; do
   fi
 done
 
+
 echo
-echo "git status:"
-git status
-
 echo "git remote url:"
-git remote get-url --all
+git remote get-url --all origin
 
+echo
+echo "Configuring .git-credentials"
 git config --global credential.helper store
 echo https://${GITHUB_TOKEN}:x-oauth-basic@github.com > ${HOME}/.git-credentials
 
