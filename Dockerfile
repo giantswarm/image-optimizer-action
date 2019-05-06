@@ -19,7 +19,7 @@ LABEL "com.github.actions.description"="Optimize images (JPEGs) pushed to a bran
 LABEL "com.github.actions.icon"="code"
 LABEL "com.github.actions.color"="yellow"
 
-RUN apk --no-cache add jq bash git file libpng libstdc++
+RUN apk --no-cache add curl jq bash git file libpng libstdc++
 
 COPY --from=builder /usr/bin/guetzli /usr/bin/guetzli
 
