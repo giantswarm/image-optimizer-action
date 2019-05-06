@@ -1,10 +1,3 @@
-FROM alpine AS builder
-
-RUN apk add curl
-
-RUN curl -s -L https://github.com/google/guetzli/releases/download/v1.0.1/guetzli_linux_x86-64 > guetzli_linux_x86-64
-RUN chmod +x guetzli_linux_x86-64
-
 FROM alpine
 
 LABEL "repository"="http://github.com/giantswarm/image-optimizer-action"
@@ -15,9 +8,11 @@ LABEL "com.github.actions.description"="Optimize images (JPEGs) pushed to a bran
 LABEL "com.github.actions.icon"="code"
 LABEL "com.github.actions.color"="yellow"
 
-RUN apk --no-cache add jq bash git
+RUN apk --no-cache add jq bash git curl
 
-COPY --from=builder guetzli_linux_x86-64 /usr/bin/guetzli
+RUN curl -s -L https://github.com/google/guetzli/releases/download/v1.0.1/guetzli_linux_x86-64 > guetzli_linux_x86-64 \
+  && chmod +x guetzli_linux_x86-64 \
+  && mv guetzli_linux_x86-64 /usr/bin/guetzli
 
 ADD lib.sh /lib.sh
 ADD entrypoint.sh /entrypoint.sh

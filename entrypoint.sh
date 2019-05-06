@@ -24,7 +24,7 @@ echo
 for f in $files; do
   if [[ -f ${f} ]]; then
     echo "Optimizing file ${f}"
-    guetzli --quality 90 ${f} ${f}.new && rm ${f} && mv ${f}.new ${f}
+    /usr/bin/guetzli --quality 90 ${f} ${f}.new && rm ${f} && mv ${f}.new ${f}
   fi
 done
 
