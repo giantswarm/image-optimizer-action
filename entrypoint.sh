@@ -29,6 +29,12 @@ files=$(cat "$GITHUB_EVENT_PATH" | jq -r '[.commits[].added] | flatten | unique 
 #echo $files
 #echo
 
+if [[ -z $files ]]; then
+  echo
+  echo "No JPEG files found to optimize."
+  exit 0
+fi
+
 for f in $files; do
   if [[ -f ${f} ]]; then
     echo
@@ -45,6 +51,4 @@ done
 echo
 git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
 
-_local_commit
-
-git push origin ${GITHUB_REF}
+_commit_and_push_if_needed
