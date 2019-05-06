@@ -11,10 +11,10 @@ echo "-----------------------------------------------------------------------"
 
 _requires_token
 
-#echo
-#echo "Details on commits"
-#cat "$GITHUB_EVENT_PATH" | jq -r .commits
-#echo
+echo
+echo "Details on event"
+cat "$GITHUB_EVENT_PATH" | jq -M .
+echo
 
 files=$(cat "$GITHUB_EVENT_PATH" | jq -r '[.commits[].added] | flatten | unique | .[]' | grep -i ".JPG$")
 #echo
@@ -38,7 +38,7 @@ echo "git status:"
 git status
 
 echo "git remote url:"
-git remote get-url
+git remote get-url --all
 
 git config --global credential.helper store
 echo https://${GITHUB_TOKEN}:x-oauth-basic@github.com > ${HOME}/.git-credentials
