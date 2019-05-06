@@ -1,16 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
 # Credits to https://github.com/bltavares/actions/ !
-
-_is_automated_event() {
-	AUTOFIX_EVENTS=${AUTOFIX_EVENTS:-push}
-
-	if [[ ${GITHUB_EVENT_NAME} =~ ^($AUTOFIX_EVENTS)$ ]]; then
-		return 0
-	fi
-
-	return 1
-}
 
 _requires_token() {
 	if [[ -z $GITHUB_TOKEN ]]; then
