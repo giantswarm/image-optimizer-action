@@ -36,7 +36,7 @@ done
 
 echo
 echo "git remote url:"
-git remote add origin https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
 
 _local_commit
 
