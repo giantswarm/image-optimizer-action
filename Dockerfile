@@ -10,9 +10,9 @@ LABEL "com.github.actions.color"="yellow"
 
 RUN apk --no-cache add jq bash git curl
 
-RUN curl -s -L https://github.com/google/guetzli/releases/download/v1.0.1/guetzli_linux_x86-64 > guetzli_linux_x86-64 \
-  && chmod +x guetzli_linux_x86-64 \
-  && mv guetzli_linux_x86-64 /usr/bin/guetzli
+RUN curl -s -L https://github.com/google/guetzli/releases/download/v1.0.1/guetzli_linux_x86-64 > /usr/bin/guetzli \
+  && chmod +x /usr/bin/guetzli \
+  && ls -la /usr/bin/guetzli
 
 ADD lib.sh /lib.sh
 ADD entrypoint.sh /entrypoint.sh
