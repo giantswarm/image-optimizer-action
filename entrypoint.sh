@@ -24,7 +24,7 @@ echo "Details on event"
 cat "$GITHUB_EVENT_PATH" | jq -M .
 echo
 
-files=$(cat "$GITHUB_EVENT_PATH" | jq -r '[.commits[].added] | flatten | unique | .[]' | grep -i ".JPG$")
+files=$(cat "$GITHUB_EVENT_PATH" | jq -r '[.commits[].added] | flatten | unique | .[]' | grep -i ".JPG$" || true)
 #echo
 #echo $files
 #echo
