@@ -23,9 +23,13 @@ files=$(cat "$GITHUB_EVENT_PATH" | jq -r '[.commits[].added] | flatten | unique 
 
 for f in $files; do
   if [[ -f ${f} ]]; then
+    echo
     echo "Optimizing file ${f}"
+    ls -la ${f}
     file ${f}
     /usr/bin/guetzli --quality 90 ${f} ${f}.new && rm ${f} && mv ${f}.new ${f}
+    echo "After optimization:"
+    ls -la ${f}
   fi
 done
 
