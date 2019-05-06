@@ -11,6 +11,14 @@ echo "-----------------------------------------------------------------------"
 
 _requires_token
 
+if [[ "${GITHUB_REF}" == "refs/heads/master" ]]; then
+  echo
+  echo "This action is meant to perform on pull requests (branches)."
+  echo "It does not perform any optimizations on pushes to master,"
+  echo "to avoid optimizing images twice."
+  exit 0
+fi
+
 echo
 echo "Details on event"
 cat "$GITHUB_EVENT_PATH" | jq -M .
@@ -35,7 +43,6 @@ done
 
 
 echo
-echo "git remote url:"
 git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
 
 _local_commit
