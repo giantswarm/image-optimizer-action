@@ -1,3 +1,14 @@
+FROM alpine AS builder
+
+RUN apk --no-cache add curl build-base libpng-dev
+
+RUN curl -s -L https://github.com/google/guetzli/archive/v1.0.1.tar.gz > guetzli-1.0.1.tar.gz && \
+  tar xvzf guetzli-1.0.1.tar.gz && \
+  cd guetzli-1.0.1 && \
+  make && \
+  mv bin/Release/guetzli /usr/bin/guetzli
+
+
 FROM alpine
 
 LABEL "repository"="http://github.com/giantswarm/image-optimizer-action"
@@ -8,12 +19,10 @@ LABEL "com.github.actions.description"="Optimize images (JPEGs) pushed to a bran
 LABEL "com.github.actions.icon"="code"
 LABEL "com.github.actions.color"="yellow"
 
-RUN apk --no-cache add jq bash git curl
+RUN apk --no-cache add jq bash git file libpng libstdc++
 
-RUN curl -s -L https://github.com/google/guetzli/releases/download/v1.0.1/guetzli_linux_x86-64 > /usr/bin/guetzli \
-  && chmod +x /usr/bin/guetzli \
-  && ls -la /usr/bin/guetzli
+COPY --from=builder /usr/bin/guetzli /usr/bin/guetzli
 
 ADD lib.sh /lib.sh
-ADD entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+#ADD entrypoint.sh /entrypoint.sh
+#ENTRYPOINT ["/entrypoint.sh"]
