@@ -37,8 +37,12 @@ echo
 echo "git status:"
 git status
 
-_commit_if_needed
+echo "git remote url:"
+git remote get-url
 
-#git config --global credential.helper store
-#echo https://${GITHUB_TOKEN}:x-oauth-basic@github.com >> ${HOME}/.git-credentials
-#git commit -a -m "Optimizing image(s)"
+git config --global credential.helper store
+echo https://${GITHUB_TOKEN}:x-oauth-basic@github.com > ${HOME}/.git-credentials
+
+_local_commit
+
+git push origin ${GITHUB_REF}
