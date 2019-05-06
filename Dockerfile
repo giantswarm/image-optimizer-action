@@ -24,5 +24,5 @@ RUN apk --no-cache add jq bash git file libpng libstdc++
 COPY --from=builder /usr/bin/guetzli /usr/bin/guetzli
 
 ADD lib.sh /lib.sh
-#ADD entrypoint.sh /entrypoint.sh
-#ENTRYPOINT ["/entrypoint.sh"]
+ADD entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
