@@ -3,7 +3,7 @@ FROM alpine AS builder
 RUN apk --no-cache add curl build-base libpng-dev
 
 RUN curl -s -L https://github.com/google/guetzli/archive/v1.0.1.tar.gz > guetzli-1.0.1.tar.gz && \
-  tar xvzf guetzli-1.0.1.tar.gz && \
+  tar xzf guetzli-1.0.1.tar.gz && \
   cd guetzli-1.0.1 && \
   make && \
   mv bin/Release/guetzli /usr/bin/guetzli
