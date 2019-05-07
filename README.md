@@ -24,3 +24,11 @@ action "image-optimizer-action" {
   secrets = ["GITHUB_TOKEN"]
 }
 ```
+
+## Limitations / possible improvements
+
+- Only works on branches, not on pushes to `master`. This could be made configurable in the future.
+
+- Only works on files with suffix `.jpg` or `.JPG`, not `.jpeg` etc. We should use `file` on every added file and detect JPEGs that way instead.
+
+- No way to ignore specific files, e. g. files that have been optimized already before being committed.
